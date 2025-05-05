@@ -181,8 +181,11 @@ impl BuffersWrapper {
 
     fn push_image(&mut self, image: Image) -> Result<json::Index<json::Texture>, MeshExportError> {
         let image_size = image.size();
+        let Some(image_data) = image.data else {
+            return Err(MeshExportError::ImageConversionFailed);
+        };
         let image_buffer: image::ImageBuffer<image::Rgba<_>, _> =
-            image::ImageBuffer::from_raw(image_size[0], image_size[1], image.data)
+            image::ImageBuffer::from_raw(image_size[0], image_size[1], image_data)
                 .ok_or(MeshExportError::ImageConversionFailed)?;
         let mut bytes: Vec<u8> = Vec::new();
         image_buffer
@@ -461,7 +464,7 @@ pub fn export_meshes<
     meshes: I,
     target_name: Option<String>,
     image_getter: F,
-    options: CompressGltfOptions,
+    _options: CompressGltfOptions,
 ) -> Result<GltfExportResult, MeshExportError> {
     let mut buffers = BuffersWrapper::new();
     let mut root = json::Root {
