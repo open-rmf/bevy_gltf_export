@@ -2,6 +2,17 @@
 name = "bevy_gltf_export"
 version = "0.1.0"
 edition = "2021"
+authors = ["Luca Della Vedova <lucadv@intrinsic.ai>"]
+license = "Apache-2.0"
+description = "Export bevy meshes into gltf scenes"
+readme = "README.md"
+repository = "https://github.com/open-rmf/bevy_gltf_export"
+keywords = ["export", "gltf", "glb", "bevy"]
+categories = [
+  "game-development",
+]
+# Generated test files
+exclude = ["*.glb"]
 
 [dependencies]
 bevy_asset = "0.16.0"
