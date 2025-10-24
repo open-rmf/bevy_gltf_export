@@ -191,7 +191,7 @@ impl BuffersWrapper {
         image_buffer
             .write_to(
                 &mut std::io::Cursor::new(&mut bytes),
-                image::ImageOutputFormat::Png,
+                image::ImageFormat::Png,
             )
             .or(Err(MeshExportError::ImageConversionFailed))?;
 
